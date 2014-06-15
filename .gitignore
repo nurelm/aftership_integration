@@ -1,0 +1,5 @@
+# Ignore bundler config.
+/.bundle
+
+.DS_Store
+.ruby-gemset
