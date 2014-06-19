@@ -1,0 +1,39 @@
+{
+  "meta": {
+    "code": 201
+  },
+  "data": {
+    "tracking": {
+      "active": true,
+      "created_at": "2014-02-28T08:33:42+00:00",
+      "custom_fields": {
+        "product_price": "19.99",
+        "product_name": "iPhone Case"
+      },
+      "customer_name": null,
+      "destination_country_iso3": "USA",
+      "emails": [
+        "customer@email.com"
+      ],
+      "expected_delivery": null,
+      "updated_at": "2014-02-28T08:33:42+00:00",
+      "order_id": "100001",
+      "order_id_path": "",
+      "origin_country_iso3": null,
+      "shipment_type": null,
+      "shipment_package_count": 0,
+      "slug": "dhl",
+      "unique_token": "lJ4uZ2ELc",
+      "signed_by": null,
+      "smses": [
+        "+154175430101"
+      ],
+      "source": "api",
+      "tag": "Pending",
+      "title": "Sample Tracking Number",
+      "tracked_count": 3,
+      "tracking_number": "2185849691",
+      "checkpoints": []
+    }
+  }
+}

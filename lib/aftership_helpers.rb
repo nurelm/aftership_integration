@@ -1,7 +1,8 @@
 module AftershipHelpers
   def process_shipment
-    aftership = AftershipService.new(@payload)
-    aftership.update_or_create!
+    aftership = AftershipService.new(@payload, @config)
+    @tracking = aftership.update_or_create!
+    add_shipment_object
   end
 
   def process_request
@@ -12,5 +13,11 @@ module AftershipHelpers
     rescue Exception => e
       result 500, 'Sorry, something went wrong.'
     end
+  end
+
+  def add_shipment_object
+    shipment = @payload[:shipment]
+    shipment[:checkpoints] = @tracking['checkpoints']
+    add_object :shipment, shipment
   end
 end

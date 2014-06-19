@@ -40,11 +40,9 @@ class AftershipEndpoint < EndpointBase::Sinatra::Base
 
   post '/get_tracking' do
     process_request do
-      aftership = AftershipService.new(@payload)
-      tracking = aftership.get_tracking!
-      shipment = @payload[:shipment]
-      shipment[:checkpoints] = tracking['checkpoints']
-      add_object :shipment, shipment
+      aftership = AftershipService.new(@payload, @config)
+      @tracking = aftership.get_tracking!
+      add_shipment_object
       result 200, 'Successfully updated checkpoints from AfterShip.'
     end
   end

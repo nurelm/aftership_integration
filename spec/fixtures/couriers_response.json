@@ -1,0 +1,66 @@
+{
+  "meta": {
+    "code": 200
+  },
+  "data": {
+    "total": 8,
+    "tracking_number": "1234567890",
+    "couriers": [
+      {
+        "slug": "dhl",
+        "name": "DHL",
+        "phone": "+1 800 225 5345",
+        "other_name": "DHL Express",
+        "web_url": "http://www.dhl.com/"
+      },
+      {
+        "slug": "yrc",
+        "name": "YRC",
+        "phone": "+1 800-468-5739",
+        "other_name": "YRC Freight",
+        "web_url": "http://www.yrc.com/"
+      },
+      {
+        "slug": "gls",
+        "name": "GLS",
+        "phone": "+44 208 997 7038",
+        "other_name": "General Logistics Systems",
+        "web_url": "https://gls-group.eu/EU/en/home"
+      },
+      {
+        "slug": "purolator",
+        "name": "Purolator",
+        "phone": "+1-888-744-7123",
+        "other_name": "Purolator Freight",
+        "web_url": "http://www.purolator.com/"
+      },
+      {
+        "slug": "aramex",
+        "name": "Aramex",
+        "phone": "+1 (718) 5538740",
+        "other_name": "ارامكس",
+        "web_url": "http://www.aramex.com/"
+      },
+      {
+        "slug": "interlink-express",
+        "name": "Interlink Express",
+        "phone": "+44 8702 200 300",
+        "other_name": "Interlink UK",
+        "web_url": "http://www.interlinkexpress.com/"
+      },
+      {
+        "slug": "dpd-uk",
+        "name": "DPD UK",
+        "phone": "+44 845 9 300 350",
+        "other_name": "Dynamic Parcel Distribution UK",
+        "web_url": "http://www.dpd.co.uk/"
+      },
+      {
+        "slug": "mrw-spain",
+        "name": "MRW",
+        "other_name": "MRW Spain",
+        "web_url": "http://www.mrw.es/"
+      }
+    ]
+  }
+}
