@@ -12,6 +12,12 @@ module FactoryRequests
       JSON.parse(load_fixture('shipment_request'))
     end
   end
+
+  class << self
+    def trackings
+      JSON.parse(load_fixture('get_trackings_request'))
+    end
+  end
 end
 
 module FactoryResponses
@@ -32,6 +38,10 @@ module FactoryResponses
 
     def tracking_posted_successfully
       JSON.parse(load_fixture('post_tracking_success_response'))
+    end
+
+    def trackings
+      JSON.parse(load_fixture('trackings_response'))
     end
   end
 end
