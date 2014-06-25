@@ -4,6 +4,29 @@ module Fixtures
   end
 end
 
+module Factory
+  class << self
+    def trackings_to_shipments_result
+      shipment = FactoryRequests.shipment['shipment']
+      tracking = FactoryResponses.tracking['data']['tracking']
+      shipment['checkpoints'] = tracking['checkpoints']
+      [shipment]
+    end
+
+    def shipment_to_tracking_result
+      tracking = FactoryResponses.tracking['data']['tracking']
+      {
+        'title'         => tracking['order_id'],
+        'smses'         => tracking['smses'],
+        'emails'        => tracking['emails'],
+        'order_id'      => tracking['order_id'],
+        'customer_name' => tracking['customer_name'],
+        'custom_fields' => tracking['custom_fields']
+      }
+    end
+  end
+end
+
 module FactoryRequests
   extend Fixtures
 
@@ -11,9 +34,7 @@ module FactoryRequests
     def shipment
       JSON.parse(load_fixture('shipment_request'))
     end
-  end
-
-  class << self
+  
     def trackings
       JSON.parse(load_fixture('get_trackings_request'))
     end
@@ -41,7 +62,10 @@ module FactoryResponses
     end
 
     def trackings
-      JSON.parse(load_fixture('trackings_response'))
+      response = JSON.parse(load_fixture('trackings_response'))
+      tracking_response = tracking
+      response['data']['trackings'] = [tracking_response['data']['tracking']]
+      response
     end
   end
 end

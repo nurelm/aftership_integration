@@ -2,11 +2,13 @@ require 'spec_helper'
 
 describe PostShipment do
   let(:shipment_payload) { FactoryRequests.shipment }
+  let(:shipment) { shipment_payload['shipment'] }
   let(:couriers) { FactoryResponses.couriers }
   let(:tracking) { FactoryResponses.tracking }
   let(:tracking_not_exist) { FactoryResponses.tracking_not_exist }
   let(:tracking_posted_successfully) { FactoryResponses.tracking_posted_successfully }
   let(:post_shipment) { PostShipment.new(shipment_payload, shipment_payload["parameters"]) }
+  let(:tracking_result) { Factory.shipment_to_tracking_result }
 
   context "#post!" do
     before do
@@ -62,15 +64,7 @@ describe PostShipment do
 
   context "#params" do
     it "returns shipment data" do
-      shipment = shipment_payload['shipment']
-      expect(post_shipment.send(:params)).to eq({
-        'title'         => shipment['order_id'],
-        'smses'         => [shipment['shipping_address']['phone']],
-        'emails'        => [shipment['email']],
-        'order_id'      => shipment['order_id'],
-        'customer_name' => [shipment['shipping_address']['firstname'], shipment['shipping_address']['lastname']].join(', '),
-        'custom_fields' => shipment
-      })
+      expect(post_shipment.send(:params)).to eq(tracking_result)
     end
   end
 end

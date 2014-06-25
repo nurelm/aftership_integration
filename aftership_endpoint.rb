@@ -13,6 +13,7 @@ require 'aftership'
 # Aftership endpoint helpers
 require './lib/aftership_helpers'
 require './lib/aftership_service'
+require './lib/fields'
 require './lib/post_shipment'
 require './lib/get_trackings'
 
@@ -29,24 +30,22 @@ class AftershipEndpoint < EndpointBase::Sinatra::Base
   post '/add_shipment' do
     process_request do
       post_shipment
-      result 201, 'Successfully sent shipment to AfterShip.'
+      result 200, 'Successfully sent shipment to AfterShip.'
     end
   end
 
   post '/update_shipment' do
     process_request do
       post_shipment
-      result 200, 'Successfully updated shipment for AfterShip.'
+      result 200, 'Successfully updated shipment to AfterShip.'
     end
   end
 
   post '/get_trackings' do
     process_request do
       get_trackings = GetTrackings.new(@payload, @config)
-      @trackings = get_trackings.get!
-      @trackings.map do |tracking|
-        shipment = tracking['custom_fields']
-        shipment['checkpoints'] = tracking['checkpoints']
+      @shipments = get_trackings.get!
+      @shipments.each do |shipment|
         add_object :shipment, shipment.deep_symbolize_keys
       end
       result 200, 'Successfully updated trackings from AfterShip.'
