@@ -13,7 +13,6 @@ require 'aftership'
 # Aftership endpoint helpers
 require './lib/aftership_helpers'
 require './lib/aftership_service'
-require './lib/fields'
 require './lib/post_shipment'
 require './lib/get_trackings'
 

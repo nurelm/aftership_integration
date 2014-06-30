@@ -7,35 +7,7 @@
       "active": true,
       "created_at": "2014-02-28T08:33:42+00:00",
       "custom_fields": {
-        "id": "12836",
-        "order_id": "R154085346",
-        "email": "spree@example.com",
-        "cost": 5,
-        "status": "ready",
-        "stock_location": "default",
-        "shipping_method": "UPS Ground (USD)",
-        "tracking": "1Z19A2R70355535069",
-        "shipped_at": "2014-02-03T17:33:55.343Z",
-        "shipping_address": {
-          "firstname": "Joe",
-          "lastname": "Smith",
-          "address1": "1234 Awesome Street",
-          "address2": "",
-          "zipcode": "90210",
-          "city": "Hollywood",
-          "state": "California",
-          "country": "US",
-          "phone": "0000000000"
-        },
-        "items": [
-          {
-            "name": "Spree T-Shirt",
-            "product_id": "SPREE-T-SHIRT",
-            "quantity": 1,
-            "price": 30,
-            "options": {}
-          }
-        ]
+        "id": "12836"
       },
       "customer_name": null,
       "destination_country_iso3": "USA",
