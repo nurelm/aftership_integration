@@ -20,7 +20,7 @@ class AftershipService
       courier = response['data']['couriers'].first
       return courier['slug'] if courier && courier['slug']
     end
-    raise BadTrackingNumberError
+    raise BadTrackingNumberError, "Was provided wrong or not supported Tracking Number."
   end
 
   def authenticate

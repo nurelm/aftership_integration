@@ -8,7 +8,7 @@ module AftershipHelpers
     begin
       yield
     rescue AftershipError => e
-      result e.code, e.message
+      result 500, e.message
     end
   end
 end
