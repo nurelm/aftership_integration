@@ -9,6 +9,17 @@ class PostShipment < AftershipService
     end
   end
 
+  def params
+    {
+      'title' => "Order # #{shipment['order_id']}",
+      'smses' => phone_numbers,
+      'emails' => [shipment['email']],
+      'order_id' => shipment['order_id'],
+      'customer_name' => [shipment['shipping_address']['firstname'], shipment['shipping_address']['lastname']].join(' '),
+      'custom_fields' => { 'wombat_id' => shipment['id'] }
+    }
+  end
+
   private
 
   def update
@@ -29,14 +40,12 @@ class PostShipment < AftershipService
     end
   end
 
-  def params
-    {
-      'title' => shipment['order_id'],
-      'smses' => [shipment['shipping_address']['phone']],
-      'emails' => [shipment['email']],
-      'order_id' => shipment['order_id'],
-      'customer_name' => [shipment['shipping_address']['firstname'], shipment['shipping_address']['lastname']].join(' '),
-      'custom_fields' => { 'wombat_id' => shipment['id'] }
-    }
+  def phone_numbers
+    phone = shipment['shipping_address']['phone'].to_s
+    if phone.start_with? "+"
+      [phone]
+    else
+      [phone.insert(0, "+")]
+    end
   end
 end

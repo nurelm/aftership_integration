@@ -63,8 +63,12 @@ describe PostShipment do
   end
 
   context "#params" do
-    it "returns shipment data" do
-      expect(post_shipment.send(:params)).to eq(tracking_result)
+    it "normalizes phones for aftership api" do
+      payload = { 'shipment' => { 'shipping_address' => { 'phone' => '33-333-333' }}}
+      subject = PostShipment.new(payload, {})
+      phones = subject.params['smses']
+
+      expect(phones).to eq ["+33-333-333"]
     end
   end
 end
