@@ -10,7 +10,7 @@
       "slug": "ups",
       "active": false,
       "custom_fields": {
-        "id": "12836" 
+        "wombat_id": "12836"
       },
       "customer_name": "Joe Smith",
       "destination_country_iso3": "NLD",

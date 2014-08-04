@@ -36,7 +36,7 @@ class PostShipment < AftershipService
       'emails' => [shipment['email']],
       'order_id' => shipment['order_id'],
       'customer_name' => [shipment['shipping_address']['firstname'], shipment['shipping_address']['lastname']].join(' '),
-      'custom_fields' => { 'id' => shipment['id'] }
+      'custom_fields' => { 'wombat_id' => shipment['id'] }
     }
   end
 end

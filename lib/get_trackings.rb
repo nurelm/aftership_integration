@@ -17,9 +17,9 @@ class GetTrackings < AftershipService
   def trackings_to_shipments(trackings)
     shipments = []
     trackings.each do |tracking|
-      if tracking['custom_fields'] && tracking['custom_fields']['id']
+      if tracking['custom_fields'] && tracking['custom_fields']['wombat_id']
         shipments << {
-          'id' => tracking['custom_fields']['id'],
+          'id' => tracking['custom_fields']['wombat_id'],
           'checkpoints' => tracking['checkpoints']
         }
       end
