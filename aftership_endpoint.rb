@@ -52,7 +52,7 @@ class AftershipEndpoint < EndpointBase::Sinatra::Base
       line = if (count = @shipments.count) > 0
                "Updating #{count} #{"shipment".pluralize count} from AfterShip"
              else
-               "No tracking info found in AfterShip"
+               "No tracking records found in AfterShip"
              end
 
       result 200, line

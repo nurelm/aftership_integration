@@ -1,10 +1,17 @@
 class GetTrackings < AftershipService
   def get!
-    @response = AfterShip::V3::Tracking.get_multi()
+    @response = AfterShip::V3::Tracking.get_multi params
     process_response
   end
 
   private
+
+  def params
+    hash = {}
+    hash[:tag] = tracking_tags if tracking_tags.present?
+    hash[:created_at_min] = tracking_days if tracking_days.present?
+    hash
+  end
 
   def process_response
     if @response['meta']['code'] == 200
