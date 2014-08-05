@@ -25,6 +25,14 @@ describe AftershipEndpoint do
       post '/add_shipment', shipment_payload.to_json, auth
       expect(last_response.status).to eq 200
     end
+
+    it "returns friendly message on missing tracking number" do
+      shipment_payload['shipment']['tracking'] = ""
+      post '/add_shipment', shipment_payload.to_json, auth
+
+      expect(last_response.status).to eq 500
+      expect(json_response[:summary]).to match "provide a tracking number via shipment.tracking"
+    end
   end
 
   context "POST :update_shipment" do

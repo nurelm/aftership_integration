@@ -15,11 +15,17 @@ class AftershipService
   end
 
   def check_tracking_number!
+    unless tracking_number.present?
+      raise AftershipError, "You need to provide a tracking number via shipment.tracking"
+    end
+
     response = AfterShip::V3::Courier.detect(tracking_number)
+
     if response['meta']['code'] == 200
       courier = response['data']['couriers'].first
       return courier['slug'] if courier && courier['slug']
     end
+
     raise BadTrackingNumberError, "Was provided wrong or not supported Tracking Number."
   end
 
