@@ -8,8 +8,9 @@ module Factory
   class << self
     def trackings_to_shipments_result
       shipment = {
-        'id' => FactoryRequests.shipment['shipment']['id'], 
-        'checkpoints' => FactoryResponses.tracking['data']['tracking']['checkpoints']
+        id: FactoryRequests.shipment['shipment']['id'], 
+        status: FactoryResponses.tracking['data']['tracking']['tag'].downcase,
+        checkpoints: FactoryResponses.tracking['data']['tracking']['checkpoints']
       }
       [shipment]
     end

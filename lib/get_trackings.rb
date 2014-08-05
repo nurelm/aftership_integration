@@ -1,5 +1,4 @@
 class GetTrackings < AftershipService
-
   def get!
     @response = AfterShip::V3::Tracking.get_multi()
     process_response
@@ -16,15 +15,16 @@ class GetTrackings < AftershipService
   end
 
   def trackings_to_shipments(trackings)
-    shipments = []
-    trackings.each do |tracking|
+    trackings.inject([]) do |shipments, tracking|
       if tracking['custom_fields'] && tracking['custom_fields']['wombat_id']
         shipments << {
-          'id' => tracking['custom_fields']['wombat_id'],
-          'checkpoints' => tracking['checkpoints']
+          id: tracking['custom_fields']['wombat_id'],
+          status: tracking['tag'].downcase,
+          checkpoints: tracking['checkpoints']
         }
       end
+
+      shipments
     end
-    shipments
   end
 end

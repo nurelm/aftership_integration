@@ -43,11 +43,19 @@ class AftershipEndpoint < EndpointBase::Sinatra::Base
   post '/get_trackings' do
     process_request do
       get_trackings = GetTrackings.new(@payload, @config)
+
       @shipments = get_trackings.get!
       @shipments.each do |shipment|
         add_object :shipment, shipment.deep_symbolize_keys
       end
-      result 200, 'Successfully updated trackings from AfterShip.'
+
+      line = if (count = @shipments.count) > 0
+               "Updating #{count} #{"shipment".pluralize count} from AfterShip"
+             else
+               "No tracking info found in AfterShip"
+             end
+
+      result 200, line
     end
   end
 end
