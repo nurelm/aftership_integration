@@ -36,24 +36,4 @@ class AftershipService
   def api_key
     @config['aftership_api_key']
   end
-
-  # Current status of tracking. Values include:
-  #
-  #   Pending, InTransit, OutForDelivery, AttemptFail, Delivered, Exception, Expired
-  #
-  # Use comma for multiple values.
-  def tracking_tags
-    @config['aftership_tracking_tag']
-  end
-
-  # Maps to AfterShip created_at_min:
-  #
-  #   Start date and time of trackings created. AfterShip only stores data of 90 days.
-  #   (Defaults: 30 days ago, Example: 2013-03-15T16:41:56+08:00)
-  #
-  def tracking_days
-    if since = @config['aftership_tracking_days']
-      since.to_i.days.ago.utc
-    end
-  end
 end

@@ -49,6 +49,8 @@ class AftershipEndpoint < EndpointBase::Sinatra::Base
         add_object :shipment, shipment.deep_symbolize_keys
       end
 
+      add_parameter "aftership_tracking_since", Time.now.utc.iso8601
+
       if (count = @shipments.count) > 0
         result 200, "Received #{count} #{"shipment".pluralize count} from AfterShip"
       else

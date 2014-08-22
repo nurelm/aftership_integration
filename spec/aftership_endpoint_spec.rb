@@ -61,6 +61,7 @@ describe AftershipEndpoint do
 
       post '/get_trackings', trackings_payload.to_json, auth
       expect(last_response.status).to eq 200
+      expect(json_response[:parameters][:aftership_tracking_since]).to be_present
     end
 
     it "returns success" do
