@@ -49,13 +49,11 @@ class AftershipEndpoint < EndpointBase::Sinatra::Base
         add_object :shipment, shipment.deep_symbolize_keys
       end
 
-      line = if (count = @shipments.count) > 0
-               "Updating #{count} #{"shipment".pluralize count} from AfterShip"
-             else
-               "No tracking records found in AfterShip"
-             end
-
-      result 200, line
+      if (count = @shipments.count) > 0
+        result 200, "Received #{count} #{"shipment".pluralize count} from AfterShip"
+      else
+        result 200
+      end
     end
   end
 end
