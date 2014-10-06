@@ -10,6 +10,7 @@ module Factory
       shipment = {
         id: FactoryRequests.shipment['shipment']['id'], 
         status: FactoryResponses.tracking['data']['tracking']['tag'].downcase,
+        aftership_tracking: FactoryResponses.tracking['data']['tracking'].except('checkpoints'),
         checkpoints: FactoryResponses.tracking['data']['tracking']['checkpoints']
       }
       [shipment]

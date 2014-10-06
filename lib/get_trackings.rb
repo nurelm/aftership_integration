@@ -27,6 +27,7 @@ class GetTrackings < AftershipService
         shipments << {
           id: tracking['custom_fields']['wombat_id'],
           status: tracking['tag'].downcase,
+          aftership_tracking: tracking.except('checkpoints'),
           checkpoints: tracking['checkpoints']
         }
       end
