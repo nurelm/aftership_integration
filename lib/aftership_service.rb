@@ -54,6 +54,8 @@ class AftershipService
   def tracking_days
     if since = @config['aftership_tracking_days']
       since.to_i.days.ago.utc
+    else
+      10.days.ago.utc
     end
   end
 end
