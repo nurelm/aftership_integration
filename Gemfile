@@ -17,9 +17,11 @@ end
 
 group :development, :test do
   gem 'rspec'
+  gem 'vcr'
 end
 
 group :test do
+  gem 'pry'
   gem 'webmock'
   gem 'rack-test'
 end
