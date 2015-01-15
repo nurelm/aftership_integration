@@ -19,7 +19,8 @@ class AftershipService
       raise AftershipError, "You need to provide a tracking number via shipment.tracking"
     end
 
-    response = AfterShip::V3::Courier.detect(tracking_number)
+    params = { tracking_number: tracking_number }
+    response = AfterShip::V4::Courier.detect(params)
 
     if response['meta']['code'] == 200
       courier = response['data']['couriers'].first

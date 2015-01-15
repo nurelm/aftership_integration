@@ -1,8 +1,8 @@
 class PostShipment < AftershipService
   def post!
     @courier_slug = check_tracking_number!
-    response = AfterShip::V3::Tracking.get(@courier_slug, tracking_number)
-    if response['meta']['code'] == 404
+    response = AfterShip::V4::Tracking.get(@courier_slug, tracking_number)
+    if response['meta']['code'] == 4004
       create
     else
       update
@@ -23,12 +23,12 @@ class PostShipment < AftershipService
   private
 
   def update
-    @response = AfterShip::V3::Tracking.update(@courier_slug, tracking_number, params)
+    @response = AfterShip::V4::Tracking.update(@courier_slug, tracking_number, params)
     process_response
   end
 
   def create
-    @response = AfterShip::V3::Tracking.create(tracking_number, params)
+    @response = AfterShip::V4::Tracking.create(tracking_number, params)
     process_response
   end
 

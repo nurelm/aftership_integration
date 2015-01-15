@@ -8,7 +8,7 @@ gem 'endpoint_base', github: 'spree/endpoint_base'
 gem 'capistrano'
 gem 'honeybadger'
 
-gem 'aftership', "~> 3.0"
+gem 'aftership', "~> 4.1.0"
 
 group :production do
   gem 'foreman'

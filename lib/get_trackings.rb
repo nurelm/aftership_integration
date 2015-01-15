@@ -1,6 +1,6 @@
 class GetTrackings < AftershipService
   def get!
-    @response = AfterShip::V3::Tracking.get_multi params
+    @response = AfterShip::V4::Tracking.get_all params
     process_response
   end
 

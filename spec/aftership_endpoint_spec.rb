@@ -10,6 +10,14 @@ describe AftershipEndpoint do
   let(:trackings) { FactoryResponses.trackings }
   let(:trackings_result) { Factory.trackings_to_shipments_result }
 
+  let(:config) do
+    {
+      parameters: {
+        aftership_api_key: ENV['AFTERSHIP_APIKEY']
+      }
+    }
+  end
+
   context "POST :add_shipment" do
     it "calls update_or_create shipment" do
       receive_shipment_updater
@@ -18,12 +26,23 @@ describe AftershipEndpoint do
     end
 
     it "returns success" do
-      stub_detect_courier(couriers.to_json)
-      stub_get_tracking(tracking_not_exist.to_json)
-      stub_post_tracking(tracking_posted_successfully.to_json)
+      message = {
+        shipment: {
+          id: '123',
+          tracking: '9261290100142920399157',
+          shipping_address: {
+            firstname: 'Spree',
+            lastname: 'Commerce',
+            phone: '558699894125'
+          }
+        }
+      }.merge! config
 
-      post '/add_shipment', shipment_payload.to_json, auth
-      expect(last_response.status).to eq 200
+      VCR.use_cassette "add_shipmentv4" do
+        post '/add_shipment', message.to_json, auth
+        expect(json_response[:summary]).to match 'Successfully sent shipment to AfterShip'
+        expect(last_response.status).to eq 200
+      end
     end
 
     it "returns friendly message on missing tracking number" do
@@ -64,10 +83,11 @@ describe AftershipEndpoint do
     end
 
     it "returns success" do
-      stub_get_trackings(trackings.to_json)
-
-      post '/get_trackings', trackings_payload.to_json, auth
-      expect(last_response.status).to eq 200
+      VCR.use_cassette "get_trackingsv4" do
+        post '/get_trackings', config.to_json, auth
+        expect(json_response[:summary]).to match /Receive/
+        expect(last_response.status).to eq 200
+      end
     end
   end
 
