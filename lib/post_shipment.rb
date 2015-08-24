@@ -10,13 +10,16 @@ class PostShipment < AftershipService
   end
 
   def params
+    custom_fields = shipment['custom_fields'] || {}
+    custom_fields['wombat_id'] = shipment['id']
+    
     {
       'title' => "Order # #{shipment['order_id']}",
       'smses' => phone_numbers,
       'emails' => [shipment['email']],
       'order_id' => shipment['order_id'],
       'customer_name' => [shipment['shipping_address']['firstname'], shipment['shipping_address']['lastname']].join(' '),
-      'custom_fields' => { 'wombat_id' => shipment['id'] }
+      'custom_fields' => custom_fields
     }
   end
 
